@@ -1,33 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ── CSS Variables ─────────────────────────────────────────────────────── */
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --cream:       #EDE8C8;
+  --blush:       #E8A882;
+  --rose:        #E07878;
+  --pink:        #D4698A;
+  --sage:        #8BBD6E;
+  --sage-light:  #D4E8C8;
+  --pink-light:  #F5D8E2;
+  --cream-dark:  #D8D0A0;
+  --text-primary:   #2D2420;
+  --text-secondary: #6B5B52;
+  --text-muted:     #9C8880;
+  --border:         #E0D0C0;
+  --border-focus:   #E07878;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+/* ── Base ──────────────────────────────────────────────────────────────── */
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans antialiased;
+    background-color: var(--cream);
+    color: var(--text-primary);
+    min-height: 100vh;
+  }
+
+  h1, h2, h3 {
+    @apply font-display;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--cream);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--blush);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--rose);
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+/* ── Components ────────────────────────────────────────────────────────── */
+@layer components {
+  /* Card */
+  .card {
+    @apply bg-white rounded-xl shadow-card border border-cream-300 p-6;
+  }
+
+  /* Section container */
+  .container-page {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Auth card — centered on page */
+  .auth-card {
+    @apply bg-white rounded-2xl shadow-card border border-cream-300;
+    @apply w-full max-w-lg mx-auto;
+  }
+
+  /* Form label */
+  .form-label {
+    @apply block text-sm font-medium mb-1.5;
+    color: var(--text-secondary);
+  }
+
+  /* Error text */
+  .form-error {
+    @apply text-xs mt-1;
+    color: var(--rose);
+  }
+
+  /* Helper text */
+  .form-hint {
+    @apply text-xs mt-1;
+    color: var(--text-muted);
+  }
+
+  /* Divider with text */
+  .divider-text {
+    @apply flex items-center gap-3 my-4;
+  }
+  .divider-text::before,
+  .divider-text::after {
+    content: '';
+    @apply flex-1 h-px;
+    background: var(--border);
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, var(--rose), var(--pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Page background pattern */
+  .bg-pattern {
+    background-color: var(--cream);
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(224, 120, 120, 0.06) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(139, 189, 110, 0.06) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(232, 168, 130, 0.04) 0%, transparent 60%);
+  }
 }
 
+/* ── Utilities ─────────────────────────────────────────────────────────── */
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  /* Focus ring matching brand */
+  .focus-brand:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(224, 120, 120, 0.2);
   }
 }
